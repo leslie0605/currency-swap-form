@@ -40,7 +40,7 @@ const SelectCurrency = (props) => {
     .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
 
   return (
-    <Grid item xs={12} md={3}>
+    <Grid item xs={12}>
       <Autocomplete
         value={value}
         disableClearable

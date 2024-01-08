@@ -13,9 +13,9 @@ const SwitchCurrency = () => {
   };
 
   return (
-    <Grid item xs={12} md="auto">
+    <Grid item xs={12}>
       <Button onClick={handleSwitch} sx={{ borderRadius: 1, height: "100%" }}>
-        <CompareArrowsIcon sx={{ fontSize: 30 }} />
+        <CompareArrowsIcon sx={{ fontSize: 40, transform: "rotate(90deg)" }} />
       </Button>
     </Grid>
   );

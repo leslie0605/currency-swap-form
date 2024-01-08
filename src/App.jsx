@@ -1,10 +1,12 @@
-import { Grid, Container, Typography, Box } from "@mui/material";
+import { Grid, Container, Typography, Box, Button } from "@mui/material";
 import InputAmount from "./components/InputAmount";
 import SelectCurrency from "./components/SelectCurrency";
 import SwitchCurrency from "./components/SwitchCurrency";
 import { useContext, useEffect, useState } from "react";
 import { CurrencyContext } from "./context/CurrencyContext";
 import axios from "axios";
+import OutputAmount from "./components/OutputAmount";
+import SubmitButton from "./components/SubmitButton";
 
 function App() {
   const {
@@ -28,7 +30,7 @@ function App() {
           )?.price;
 
           if (fromCurrencyPrice && toCurrencyPrice) {
-            const result = firstAmount * (toCurrencyPrice / fromCurrencyPrice);
+            const result = firstAmount * (fromCurrencyPrice / toCurrencyPrice);
             setResultCurrency(result);
           }
         })
@@ -54,42 +56,57 @@ function App() {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        sx={{ marginBottom: "2rem" }}
+        sx={{ marginBottom: "3rem" }}
       >
         <img
           src="/switcheo.png"
           alt="Switcheo Logo"
           style={{ maxWidth: "50px", marginRight: "1rem" }}
         />
-        <Typography variant="h5">Cryptocurrency Swap Form</Typography>
+        <Typography variant="h4">Cryptocurrency Swap Form</Typography>
       </Box>
 
-      <Grid container spacing={2}>
-        <InputAmount />
-        <SelectCurrency
-          value={fromCurrency}
-          setValue={setFromCurrency}
-          label="From"
-        />
-        <SwitchCurrency />
-        <SelectCurrency
-          value={toCurrency}
-          setValue={setToCurrency}
-          label="To"
-        />
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid item xs={12} sm={4} md={4}>
+          <InputAmount />
+        </Grid>
+        <Grid item xs={12} sm={3} md={3}>
+          <SelectCurrency
+            value={fromCurrency}
+            setValue={setFromCurrency}
+            label="From"
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <SwitchCurrency />
+        </Grid>
+
+        <Grid item xs={12} sm={4} md={4}>
+          <OutputAmount resultCurrency={resultCurrency} />
+        </Grid>
+
+        <Grid item xs={12} sm={3} md={3}>
+          <SelectCurrency
+            value={toCurrency}
+            setValue={setToCurrency}
+            label="To"
+          />
+        </Grid>
+        <Grid item xs={12} sm={7} md={7}>
+          {firstAmount ? (
+            <Typography
+              sx={{ textAlign: "left", marginTop: "1rem", fontSize: 18 }}
+            >
+              Exchange Rate: 1 {fromCurrency} = {resultCurrency / firstAmount}{" "}
+              {toCurrency}
+            </Typography>
+          ) : null}
+        </Grid>
+        <Grid item xs={12} sm={7} md={7} sx={{ marginTop: "1rem" }}>
+          <SubmitButton></SubmitButton>
+        </Grid>
       </Grid>
-      {firstAmount ? (
-        <Box sx={{ marginTop: "2rem" }}>
-          <Typography
-            variant="h5"
-            sx={{ marginTop: "5px", fontWeight: "bold" }}
-          >
-            {firstAmount} {fromCurrency} = {resultCurrency} {toCurrency}
-          </Typography>
-        </Box>
-      ) : (
-        ""
-      )}
     </Container>
   );
 }
