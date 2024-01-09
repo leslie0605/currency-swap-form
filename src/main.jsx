@@ -9,10 +9,31 @@ import "@fontsource/roboto/700.css";
 import "./index.css";
 import CurrencyProvider from "./context/CurrencyContext.jsx";
 
+import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
+
+import { WagmiConfig } from "wagmi";
+import { mainnet } from "viem/chains";
+
+const projectId = "eb0c400848a78eb423d49e0fbbf77b12";
+
+const chains = [mainnet];
+
+const wagmiConfig = defaultWagmiConfig({
+  chains,
+  projectId,
+  metadata: {
+    name: "test",
+  },
+});
+
+createWeb3Modal({ wagmiConfig, projectId, chains });
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CurrencyProvider>
-      <App />
+      <WagmiConfig config={wagmiConfig}>
+        <App />
+      </WagmiConfig>
     </CurrencyProvider>
   </React.StrictMode>
 );

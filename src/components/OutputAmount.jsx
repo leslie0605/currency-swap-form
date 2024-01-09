@@ -1,10 +1,11 @@
 import { Grid, TextField } from "@mui/material";
 
 const OutputAmount = ({ resultCurrency }) => {
+  const displayValue = resultCurrency === 0 ? " " : resultCurrency.toFixed(6);
   return (
     <Grid item xs={12}>
       <TextField
-        value={resultCurrency.toFixed(6)}
+        value={displayValue}
         label="Converted Amount"
         fullWidth
         InputProps={{

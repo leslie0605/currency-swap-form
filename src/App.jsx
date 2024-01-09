@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { CurrencyContext } from "./context/CurrencyContext";
 import axios from "axios";
 import OutputAmount from "./components/OutputAmount";
-import SubmitButton from "./components/SubmitButton";
 
 function App() {
   const {
@@ -103,8 +102,17 @@ function App() {
             </Typography>
           ) : null}
         </Grid>
-        <Grid item xs={12} sm={7} md={7} sx={{ marginTop: "1rem" }}>
-          <SubmitButton></SubmitButton>
+        <Grid
+          item
+          xs={12}
+          sm={7}
+          md={7}
+          sx={{ marginTop: "1rem" }}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
+          <w3m-button size="md" />
         </Grid>
       </Grid>
     </Container>
