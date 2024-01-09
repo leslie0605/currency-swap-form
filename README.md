@@ -6,4 +6,4 @@ To run the project:
 2. Use "npm install" to download node_modules.
 3. Use "npm run dev" to run the project locally.
 
-![screenshot](public/currency-swap.png)
+![screenshot](public/currency-swap-form.png)
